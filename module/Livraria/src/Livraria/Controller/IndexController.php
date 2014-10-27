@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace Livraria\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -16,6 +16,9 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $categoriaService = $this->getServiceLocator()->get('Livraria\Model\CategoriaService');
+        $categorias = $categoriaService->fetchAll();
+       
+        return new ViewModel(array('categorias' => $categorias));
     }
 }
